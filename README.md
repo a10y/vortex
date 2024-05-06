@@ -169,6 +169,28 @@ git submodule update --init --recursive
 rye sync
 ```
 
+This repo also provides a reproducible development environment via Nix Flakes.
+
+First, follow [Determinate Systems' instructions to install Nix](https://github.com/DeterminateSystems/nix-installer),
+then run
+
+```
+# Download the zig and rust toolchains required to build the project
+nix develop
+
+# You'll be dropped into a shell with the required toolchains on your $PATH
+(nix:nix-shell-env) $ cargo test
+   Compiling pyvortex v0.1.0 (/Volumes/Code/vortex/pyvortex)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.68s
+     Running unittests src/lib.rs (target/debug/deps/bench_vortex-6ca528d5aa9abefb)
+
+running 4 tests
+test test::compression_ratio ... ignored
+test test::round_trip_arrow ... ignored
+test test::round_trip_arrow_compressed ... ignored
+test test::round_trip_serde ... ignored
+```
+
 ## License
 
 Licensed under the Apache License, Version 2.0 (the "License").
